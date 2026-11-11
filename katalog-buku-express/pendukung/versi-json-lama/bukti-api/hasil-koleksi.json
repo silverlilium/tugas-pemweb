@@ -1,0 +1,286 @@
+{
+  "runner": "Newman (Postman collection runner)",
+  "requests": 8,
+  "assertionsPassed": 21,
+  "failures": 0,
+  "results": [
+    {
+      "name": "01 GET - Semua buku",
+      "method": "GET",
+      "url": "http://localhost:3000/api/buku",
+      "body": null,
+      "status": 200,
+      "statusText": "OK",
+      "response": {
+        "success": true,
+        "message": "Daftar buku berhasil diambil.",
+        "data": [
+          {
+            "id": 1,
+            "judul": "Laskar Pelangi",
+            "penulis": "Andrea Hirata",
+            "kategori": "Novel",
+            "tahun": 2005,
+            "status": "Tersedia"
+          },
+          {
+            "id": 2,
+            "judul": "Atomic Habits",
+            "penulis": "James Clear",
+            "kategori": "Pengembangan Diri",
+            "tahun": 2018,
+            "status": "Dipinjam"
+          },
+          {
+            "id": 3,
+            "judul": "Clean Code",
+            "penulis": "Robert C. Martin",
+            "kategori": "Teknologi",
+            "tahun": 2008,
+            "status": "Tersedia"
+          },
+          {
+            "id": 4,
+            "judul": "Bumi",
+            "penulis": "Tere Liye",
+            "kategori": "Novel",
+            "tahun": 2014,
+            "status": "Tersedia"
+          }
+        ],
+        "total": 4
+      },
+      "assertions": [
+        "Status 200",
+        "Respons sukses",
+        "Data berupa array"
+      ]
+    },
+    {
+      "name": "02 POST - Tambah buku uji",
+      "method": "POST",
+      "url": "http://localhost:3000/api/buku",
+      "body": "{\n  \"judul\": \"Belajar Express\",\n  \"penulis\": \"Ata\",\n  \"kategori\": \"Teknologi\",\n  \"tahun\": 2026,\n  \"status\": \"Tersedia\"\n}",
+      "status": 201,
+      "statusText": "Created",
+      "response": {
+        "success": true,
+        "message": "Buku berhasil ditambahkan.",
+        "data": {
+          "id": 5,
+          "judul": "Belajar Express",
+          "penulis": "Ata",
+          "kategori": "Teknologi",
+          "tahun": 2026,
+          "status": "Tersedia"
+        }
+      },
+      "assertions": [
+        "Status 201",
+        "Respons sukses",
+        "Judul tersimpan"
+      ]
+    },
+    {
+      "name": "03 GET - Verifikasi penambahan",
+      "method": "GET",
+      "url": "http://localhost:3000/api/buku",
+      "body": null,
+      "status": 200,
+      "statusText": "OK",
+      "response": {
+        "success": true,
+        "message": "Daftar buku berhasil diambil.",
+        "data": [
+          {
+            "id": 1,
+            "judul": "Laskar Pelangi",
+            "penulis": "Andrea Hirata",
+            "kategori": "Novel",
+            "tahun": 2005,
+            "status": "Tersedia"
+          },
+          {
+            "id": 2,
+            "judul": "Atomic Habits",
+            "penulis": "James Clear",
+            "kategori": "Pengembangan Diri",
+            "tahun": 2018,
+            "status": "Dipinjam"
+          },
+          {
+            "id": 3,
+            "judul": "Clean Code",
+            "penulis": "Robert C. Martin",
+            "kategori": "Teknologi",
+            "tahun": 2008,
+            "status": "Tersedia"
+          },
+          {
+            "id": 4,
+            "judul": "Bumi",
+            "penulis": "Tere Liye",
+            "kategori": "Novel",
+            "tahun": 2014,
+            "status": "Tersedia"
+          },
+          {
+            "id": 5,
+            "judul": "Belajar Express",
+            "penulis": "Ata",
+            "kategori": "Teknologi",
+            "tahun": 2026,
+            "status": "Tersedia"
+          }
+        ],
+        "total": 5
+      },
+      "assertions": [
+        "Status 200",
+        "Respons sukses",
+        "Buku uji ada"
+      ]
+    },
+    {
+      "name": "04 PUT - Edit buku uji",
+      "method": "PUT",
+      "url": "http://localhost:3000/api/buku/5",
+      "body": "{\n  \"judul\": \"Belajar Express Edisi Revisi\",\n  \"penulis\": \"Ata\",\n  \"kategori\": \"Teknologi\",\n  \"tahun\": 2026,\n  \"status\": \"Dipinjam\"\n}",
+      "status": 200,
+      "statusText": "OK",
+      "response": {
+        "success": true,
+        "message": "Buku berhasil diperbarui.",
+        "data": {
+          "id": 5,
+          "judul": "Belajar Express Edisi Revisi",
+          "penulis": "Ata",
+          "kategori": "Teknologi",
+          "tahun": 2026,
+          "status": "Dipinjam"
+        }
+      },
+      "assertions": [
+        "Status 200",
+        "Respons sukses",
+        "Judul diperbarui"
+      ]
+    },
+    {
+      "name": "05 GET - Verifikasi perubahan",
+      "method": "GET",
+      "url": "http://localhost:3000/api/buku/5",
+      "body": null,
+      "status": 200,
+      "statusText": "OK",
+      "response": {
+        "success": true,
+        "message": "Detail buku berhasil diambil.",
+        "data": {
+          "id": 5,
+          "judul": "Belajar Express Edisi Revisi",
+          "penulis": "Ata",
+          "kategori": "Teknologi",
+          "tahun": 2026,
+          "status": "Dipinjam"
+        }
+      },
+      "assertions": [
+        "Status 200",
+        "Respons sukses",
+        "Status Dipinjam"
+      ]
+    },
+    {
+      "name": "06 DELETE - Hapus buku uji",
+      "method": "DELETE",
+      "url": "http://localhost:3000/api/buku/5",
+      "body": null,
+      "status": 200,
+      "statusText": "OK",
+      "response": {
+        "success": true,
+        "message": "Buku berhasil dihapus.",
+        "data": {
+          "id": 5,
+          "judul": "Belajar Express Edisi Revisi",
+          "penulis": "Ata",
+          "kategori": "Teknologi",
+          "tahun": 2026,
+          "status": "Dipinjam"
+        }
+      },
+      "assertions": [
+        "Status 200",
+        "Respons sukses"
+      ]
+    },
+    {
+      "name": "07 GET - Semua buku setelah hapus",
+      "method": "GET",
+      "url": "http://localhost:3000/api/buku",
+      "body": null,
+      "status": 200,
+      "statusText": "OK",
+      "response": {
+        "success": true,
+        "message": "Daftar buku berhasil diambil.",
+        "data": [
+          {
+            "id": 1,
+            "judul": "Laskar Pelangi",
+            "penulis": "Andrea Hirata",
+            "kategori": "Novel",
+            "tahun": 2005,
+            "status": "Tersedia"
+          },
+          {
+            "id": 2,
+            "judul": "Atomic Habits",
+            "penulis": "James Clear",
+            "kategori": "Pengembangan Diri",
+            "tahun": 2018,
+            "status": "Dipinjam"
+          },
+          {
+            "id": 3,
+            "judul": "Clean Code",
+            "penulis": "Robert C. Martin",
+            "kategori": "Teknologi",
+            "tahun": 2008,
+            "status": "Tersedia"
+          },
+          {
+            "id": 4,
+            "judul": "Bumi",
+            "penulis": "Tere Liye",
+            "kategori": "Novel",
+            "tahun": 2014,
+            "status": "Tersedia"
+          }
+        ],
+        "total": 4
+      },
+      "assertions": [
+        "Status 200",
+        "Respons sukses",
+        "Buku uji sudah hilang"
+      ]
+    },
+    {
+      "name": "08 GET - Detail terhapus menghasilkan 404",
+      "method": "GET",
+      "url": "http://localhost:3000/api/buku/5",
+      "body": null,
+      "status": 404,
+      "statusText": "Not Found",
+      "response": {
+        "success": false,
+        "message": "Buku tidak ditemukan."
+      },
+      "assertions": [
+        "Buku telah dihapus"
+      ]
+    }
+  ]
+}

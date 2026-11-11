@@ -1,0 +1,18 @@
+<!doctype html><html lang="id"><meta charset="utf-8"><title>BukuKita — Bukti pengujian API</title><style>*{box-sizing:border-box}body{margin:0;padding:44px;background:#f5f7f2;color:#243c33;font:16px Arial,sans-serif}main{max-width:1120px;margin:auto}header{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}.brand{font-size:24px;font-weight:bold}.meta{font-size:13px;color:#6d7d70}.eyebrow{font-size:11px;letter-spacing:2px;color:#738875}h1{font-size:32px;margin:15px 0 10px}p{font-size:14px;line-height:1.6;color:#748071}.request{border:1px solid #dfe5da;border-radius:10px;background:white;padding:20px;display:flex;gap:18px;align-items:center;margin:25px 0}.method{font-weight:bold;color:#2d7755;background:#edf3e9;padding:10px 15px;border-radius:6px}.url{font:16px monospace}.status{margin-left:auto;color:#397b58;font-size:15px;font-weight:bold}.columns{display:grid;grid-template-columns:1fr 1fr;gap:20px}.panel{background:white;border:1px solid #e0e5dc;border-radius:10px;padding:24px}h2{font-size:16px;margin:0 0 20px}pre{font:15px/1.85 monospace;white-space:pre-wrap;margin:0;overflow-wrap:anywhere}.pass{color:#407e59;line-height:2;margin-top:20px;font-size:13px}.note{margin-top:22px;padding:14px 18px;background:#e9efe4;color:#5e755b;border-radius:8px;font-size:12px;line-height:1.6}footer{margin-top:22px;color:#899381;font-size:12px}</style><main><header><span class="brand">BukuKita.</span><span class="meta">4 November 2026 · Pengujian lokal</span></header><div class="eyebrow">BUKTI RESPONS API NYATA</div><h1>POST — Tambah buku</h1><p>Hasil eksekusi koleksi Postman melalui Newman. Halaman ini adalah laporan, bukan antarmuka Postman.</p><div class="request"><span class="method">POST</span><span class="url">http://localhost:3000/api/buku</span><span class="status">201 Created</span></div><div class="columns"><section class="panel"><h2>Request body</h2><pre>{
+  &quot;judul&quot;: &quot;Belajar Express&quot;,
+  &quot;penulis&quot;: &quot;Ata&quot;,
+  &quot;kategori&quot;: &quot;Teknologi&quot;,
+  &quot;tahun&quot;: 2026,
+  &quot;status&quot;: &quot;Tersedia&quot;
+}</pre></section><section class="panel"><h2>Response JSON</h2><pre>{
+  &quot;success&quot;: true,
+  &quot;message&quot;: &quot;Buku berhasil ditambahkan.&quot;,
+  &quot;data&quot;: {
+    &quot;id&quot;: 5,
+    &quot;judul&quot;: &quot;Belajar Express&quot;,
+    &quot;penulis&quot;: &quot;Ata&quot;,
+    &quot;kategori&quot;: &quot;Teknologi&quot;,
+    &quot;tahun&quot;: 2026,
+    &quot;status&quot;: &quot;Tersedia&quot;
+  }
+}</pre></section></div><section class="pass">✓ Status 201<br>✓ Respons sukses<br>✓ Judul tersimpan<br></section><div class="note">Koleksi lengkap: 8 request · 21 pemeriksaan lulus · 0 gagal. GET setelah DELETE juga membuktikan bahwa buku uji sudah terhapus.</div><footer>Untuk screenshot Postman Desktop, ikuti PANDUAN-POSTMAN.md dan jalankan request yang sama di komputermu.</footer></main></html>

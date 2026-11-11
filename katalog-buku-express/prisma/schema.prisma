@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// Satu tabel saja agar mudah dipelajari.
+model Buku {
+  id       Int    @id @default(autoincrement())
+  judul    String @db.VarChar(120)
+  penulis  String @db.VarChar(100)
+  kategori String @db.VarChar(30)
+  tahun    Int
+  status   String @default("Tersedia") @db.VarChar(20)
+}

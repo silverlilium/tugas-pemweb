@@ -1,0 +1,230 @@
+{
+  "info": {
+    "name": "BukuKita - CRUD Express",
+    "description": "Jalankan request berurutan 01–08. POST menyimpan buku_id otomatis untuk PUT dan DELETE. Hanya buku uji hasil POST yang dihapus.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "buku_id",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "01 GET - Semua buku",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/api/buku",
+        "description": "Kirim saat server lokal berjalan. Buku uji yang dibuat boleh diubah dan dihapus."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Respons sukses\", () => pm.expect(pm.response.json().success).to.eql(true));",
+              "pm.test(\"Data berupa array\", () => pm.expect(pm.response.json().data).to.be.an(\"array\"));"
+            ]
+          }
+        }
+      ],
+      "response": []
+    },
+    {
+      "name": "02 POST - Tambah buku uji",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/buku",
+        "description": "Kirim saat server lokal berjalan. Buku uji yang dibuat boleh diubah dan dihapus.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"judul\": \"Belajar Express\",\n  \"penulis\": \"Ata\",\n  \"kategori\": \"Teknologi\",\n  \"tahun\": 2026,\n  \"status\": \"Tersedia\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
+              "pm.test(\"Respons sukses\", () => pm.expect(pm.response.json().success).to.eql(true));",
+              "if (pm.response.code === 201) pm.collectionVariables.set(\"buku_id\", String(pm.response.json().data.id));",
+              "pm.test(\"Judul tersimpan\", () => pm.expect(pm.response.json().data.judul).to.eql(\"Belajar Express\"));"
+            ]
+          }
+        }
+      ],
+      "response": []
+    },
+    {
+      "name": "03 GET - Verifikasi penambahan",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/api/buku",
+        "description": "Kirim saat server lokal berjalan. Buku uji yang dibuat boleh diubah dan dihapus."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Respons sukses\", () => pm.expect(pm.response.json().success).to.eql(true));",
+              "pm.test(\"Buku uji ada\", () => pm.expect(pm.response.json().data.some(b => b.id === Number(pm.collectionVariables.get(\"buku_id\")))).to.eql(true));"
+            ]
+          }
+        }
+      ],
+      "response": []
+    },
+    {
+      "name": "04 PUT - Edit buku uji",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/buku/{{buku_id}}",
+        "description": "Kirim saat server lokal berjalan. Buku uji yang dibuat boleh diubah dan dihapus.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"judul\": \"Belajar Express Edisi Revisi\",\n  \"penulis\": \"Ata\",\n  \"kategori\": \"Teknologi\",\n  \"tahun\": 2026,\n  \"status\": \"Dipinjam\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Respons sukses\", () => pm.expect(pm.response.json().success).to.eql(true));",
+              "pm.test(\"Judul diperbarui\", () => pm.expect(pm.response.json().data.judul).to.eql(\"Belajar Express Edisi Revisi\"));"
+            ]
+          }
+        }
+      ],
+      "response": []
+    },
+    {
+      "name": "05 GET - Verifikasi perubahan",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/api/buku/{{buku_id}}",
+        "description": "Kirim saat server lokal berjalan. Buku uji yang dibuat boleh diubah dan dihapus."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Respons sukses\", () => pm.expect(pm.response.json().success).to.eql(true));",
+              "pm.test(\"Status Dipinjam\", () => pm.expect(pm.response.json().data.status).to.eql(\"Dipinjam\"));"
+            ]
+          }
+        }
+      ],
+      "response": []
+    },
+    {
+      "name": "06 DELETE - Hapus buku uji",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{base_url}}/api/buku/{{buku_id}}",
+        "description": "Kirim saat server lokal berjalan. Buku uji yang dibuat boleh diubah dan dihapus."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Respons sukses\", () => pm.expect(pm.response.json().success).to.eql(true));"
+            ]
+          }
+        }
+      ],
+      "response": []
+    },
+    {
+      "name": "07 GET - Semua buku setelah hapus",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/api/buku",
+        "description": "Kirim saat server lokal berjalan. Buku uji yang dibuat boleh diubah dan dihapus."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Respons sukses\", () => pm.expect(pm.response.json().success).to.eql(true));",
+              "pm.test(\"Buku uji sudah hilang\", () => pm.expect(pm.response.json().data.some(b => b.id === Number(pm.collectionVariables.get(\"buku_id\")))).to.eql(false));"
+            ]
+          }
+        }
+      ],
+      "response": []
+    },
+    {
+      "name": "08 GET - Detail terhapus menghasilkan 404",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/api/buku/{{buku_id}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Buku telah dihapus\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ],
+      "response": []
+    }
+  ]
+}

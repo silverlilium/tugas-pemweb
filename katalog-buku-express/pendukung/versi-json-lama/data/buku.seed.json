@@ -1,0 +1,9 @@
+{
+  "nextId": 5,
+  "data": [
+    { "id": 1, "judul": "Laskar Pelangi", "penulis": "Andrea Hirata", "kategori": "Novel", "tahun": 2005, "status": "Tersedia" },
+    { "id": 2, "judul": "Atomic Habits", "penulis": "James Clear", "kategori": "Pengembangan Diri", "tahun": 2018, "status": "Dipinjam" },
+    { "id": 3, "judul": "Clean Code", "penulis": "Robert C. Martin", "kategori": "Teknologi", "tahun": 2008, "status": "Tersedia" },
+    { "id": 4, "judul": "Bumi", "penulis": "Tere Liye", "kategori": "Novel", "tahun": 2014, "status": "Tersedia" }
+  ]
+}

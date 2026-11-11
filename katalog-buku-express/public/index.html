@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#245748">
+  <title>BukuKita — Katalog Buku</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="BukuKita beranda"><span class="brand-icon" aria-hidden="true">▤</span>Buku<span>Kita.</span></a>
+    <span class="nav-active">Katalog buku</span>
+    <span class="header-note"><i></i> Perpustakaan pribadi</span>
+  </header>
+  <main>
+    <section class="hero">
+      <div><p class="eyebrow">SEDIKIT LEBIH TERATUR, SETIAP HARI</p><h1>Rak buku, lebih rapi.</h1><p class="intro">Satu tempat untuk mencatat, merawat, dan menemukan koleksi bukumu.</p></div>
+      <div class="book-art" aria-hidden="true"><div class="art-circle"></div><div class="book b1">CERITA</div><div class="book b2">IDE BARU</div><div class="book b3">ILMU</div><span class="spark">✦</span></div>
+    </section>
+    <section class="stats" aria-label="Ringkasan koleksi">
+      <article class="stat"><span class="stat-symbol" aria-hidden="true">▤</span><div><span>Total koleksi</span><strong id="total">—</strong></div><small>BUKU</small></article>
+      <article class="stat"><span class="stat-symbol available" aria-hidden="true">✓</span><div><span>Siap dibaca</span><strong id="tersedia">—</strong></div><small>TERSEDIA</small></article>
+      <article class="stat"><span class="stat-symbol loan" aria-hidden="true">↗&#xfe0e;</span><div><span>Sedang dipinjam</span><strong id="dipinjam">—</strong></div><small>DIPINJAM</small></article>
+    </section>
+    <div id="pesan" class="notice" role="status" aria-live="polite" hidden></div>
+    <div class="workspace">
+      <section class="panel form-panel" aria-labelledby="form-title">
+        <div class="panel-heading"><div><p class="eyebrow">RUANG UNTUK CERITA BARU</p><h2 id="form-title">Tambah buku</h2></div><span class="circle-plus" aria-hidden="true">+</span></div>
+        <p id="form-hint" class="muted">Lengkapi detail buku untuk menambah koleksi.</p>
+        <form id="buku-form">
+          <label for="judul">Judul buku <span>*</span></label><input id="judul" name="judul" maxlength="120" placeholder="Contoh: Laut Bercerita" required>
+          <label for="penulis">Penulis <span>*</span></label><input id="penulis" name="penulis" maxlength="100" placeholder="Nama penulis" required>
+          <div class="form-row"><div><label for="kategori">Kategori <span>*</span></label><select id="kategori" name="kategori" required><option value="" disabled selected>Pilih kategori</option><option>Novel</option><option>Teknologi</option><option>Pengembangan Diri</option><option>Pendidikan</option></select></div><div><label for="tahun">Tahun terbit <span>*</span></label><input id="tahun" name="tahun" type="number" min="1000" max="2100" step="1" placeholder="2026" required></div></div>
+          <label for="status">Status buku <span>*</span></label><select id="status" name="status" required><option>Tersedia</option><option>Dipinjam</option></select>
+          <button id="simpan" class="button primary" type="submit"><span aria-hidden="true">+</span> Tambah buku</button>
+          <button id="batal" class="button secondary" type="button" hidden>Batalkan edit</button>
+          <p class="form-footnote">Kolom bertanda * wajib diisi.</p>
+        </form>
+      </section>
+      <section class="panel collection" aria-labelledby="koleksi-title">
+        <div class="collection-heading"><div><p class="eyebrow">PERPUSTAKAAN KECILMU</p><h2 id="koleksi-title">Koleksi buku <span id="jumlah" class="count">0</span></h2></div><button id="muat-ulang" class="button refresh" type="button"><span aria-hidden="true">↻</span> Muat ulang</button></div>
+        <div class="search-row"><label class="search-box" for="cari"><span aria-hidden="true">⌕</span><input id="cari" type="search" placeholder="Cari judul atau penulis…" aria-label="Cari judul atau penulis"></label><select id="filter" aria-label="Filter status"><option value="">Semua status</option><option>Tersedia</option><option>Dipinjam</option></select></div>
+        <div class="table-wrap"><table><thead><tr><th scope="col">BUKU & PENULIS</th><th scope="col">KATEGORI</th><th scope="col">STATUS</th><th scope="col">AKSI</th></tr></thead><tbody id="daftar-buku"></tbody></table><p id="empty" class="empty" hidden></p></div>
+        <div class="collection-footer"><span id="table-note">Memuat koleksi…</span><span>Setiap buku punya ceritanya.</span></div>
+      </section>
+    </div>
+    <footer class="page-footer"><span>BukuKita. <span class="muted">Ruang kecil untuk ide besar.</span></span><span>Express · HTML · CSS · JavaScript</span></footer>
+  </main>
+  <dialog id="delete-dialog" aria-labelledby="delete-title"><h2 id="delete-title">Hapus buku ini?</h2><p id="delete-text"></p><p class="muted">Buku akan dihapus dari koleksi.</p><div class="dialog-actions"><button id="delete-cancel" class="button secondary">Batal</button><button id="delete-confirm" class="button danger">Ya, hapus buku</button></div></dialog>
+</body>
+</html>
